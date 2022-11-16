@@ -30,6 +30,7 @@ export const observable = (obj) => {
         watchers &&
           setTimeout(() => {
             watchers[property].forEach((fn) =>
+              // try just use this
               fn({ ...this, [property]: value })
             );
           }, 0);

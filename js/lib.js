@@ -7,7 +7,6 @@ export const makeRequest = ({ url }) => {
 
 const listeners = new WeakMap();
 const dispatch = Symbol();
-const timer = Symbol();
 
 export const observable = (obj) => {
   return new Proxy(
@@ -26,26 +25,48 @@ export const observable = (obj) => {
 
         watchers[property].push(fn);
       },
-      [timer]: null,
-      [dispatch](property, value, target) {
-        if (listeners.has(obj)) {
-          clearTimeout(target[timer]);
-          target[timer] = setTimeout(() => {
-            listeners
-              .get(obj)
-              [property].forEach((fn) => fn({ ...target, [property]: value }));
+      [dispatch](property, value) {
+        const watchers = listeners.get(obj);
+        watchers &&
+          setTimeout(() => {
+            watchers[property].forEach((fn) =>
+              fn({ ...this, [property]: value })
+            );
           }, 0);
-        }
       },
     },
     {
       set(target, property, value) {
         if (target[property] !== value) {
           target[property] = value;
-          target[dispatch](property, value, target);
+          target[dispatch](property, value);
         }
         return true;
       },
     }
   );
+};
+
+export const createElement = (type, options = {}) => {
+  const { events, text, children, ...attrs } = options;
+
+  const el = document.createElement(type);
+
+  events &&
+    Object.keys(events).forEach((key) => {
+      el.addEventListener(key, events[key]);
+    });
+
+  attrs &&
+    Object.keys(attrs).forEach((key) => {
+      attrs[key] && el.setAttribute(key, attrs[key]);
+    });
+
+  children && Array.isArray(children)
+    ? el.append(...children)
+    : el.append(children);
+
+  text && (el.textContent = text);
+
+  return el;
 };

@@ -1,0 +1,42 @@
+@import "./reset";
+:root {
+  --clr-text: #ffffff;
+  --clr-card-bg: #303030;
+  --clr-card-border: #444444;
+  --clr-body-bg: #222222;
+  --ff-sans: Lato, sans-serif;
+}
+body {
+  color: var(--clr-text);
+  background-color: var(--clr-body-bg);
+  font-family: var(--ff-sans);
+}
+
+.container {
+  width: min(90%, 1200px);
+  margin-inline: auto;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+
+  &--main {
+  }
+}
+
+.card {
+  padding: 1rem;
+  background-color: var(--clr-card-bg);
+  border: 1px solid var(--clr-card-border);
+  border-radius: 0.25rem;
+}
+
+.button {
+  background-color: var(--clr-card-bg);
+  border: 1px solid var(--clr-card-border);
+  color: inherit;
+  padding: 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}

@@ -7,20 +7,34 @@ export const makeRequest = ({ url }) => {
 
 const listeners = new WeakMap();
 const dispatch = Symbol();
+const timer = Symbol();
 
 export const observable = (obj) => {
   return new Proxy(
     {
       ...obj,
-      listen(fn) {
+      listen(property, fn) {
         if (!listeners.has(obj)) {
-          listeners.set(obj, []);
+          listeners.set(obj, {});
         }
-        listeners.get(obj).push(fn);
+
+        const watchers = listeners.get(obj);
+
+        if (!watchers[property]) {
+          watchers[property] = [];
+        }
+
+        watchers[property].push(fn);
       },
-      [dispatch](property, value) {
+      [timer]: null,
+      [dispatch](property, value, target) {
         if (listeners.has(obj)) {
-          listeners.get(obj).forEach((fn) => fn({ ...obj, [property]: value }));
+          clearTimeout(target[timer]);
+          target[timer] = setTimeout(() => {
+            listeners
+              .get(obj)
+              [property].forEach((fn) => fn({ ...target, [property]: value }));
+          }, 0);
         }
       },
     },
@@ -28,7 +42,7 @@ export const observable = (obj) => {
       set(target, property, value) {
         if (target[property] !== value) {
           target[property] = value;
-          target[dispatch](property, value);
+          target[dispatch](property, value, target);
         }
         return true;
       },

@@ -49,7 +49,7 @@ export const observable = (obj) => {
 };
 
 export const createElement = (type, options = {}) => {
-  const { events, text, children, ...attrs } = options;
+  const { events, text, html, children, ...attrs } = options;
 
   const el = document.createElement(type);
 
@@ -68,6 +68,7 @@ export const createElement = (type, options = {}) => {
     : el.append(children);
 
   text && (el.textContent = text);
+  html && (el.innerHTML = html);
 
   return el;
 };

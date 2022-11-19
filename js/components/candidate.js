@@ -1,46 +1,48 @@
 import { createElement } from "../lib.js";
 import { createPlayer } from "./player.js";
 
-export const createCandidate = (candidate) => {
-  if (!candidate) return;
-  const [player] = createPlayer(candidate.audio);
+export const createCandidate = () => {
 
-  const title = createElement("h2", { class: "title", text: "******" });
-  const picture = createElement("img", {
-    class: "picture",
-    src: "../assets/images/mystery.jpg",
-    alt: "mystery",
-  });
+  const [player, updatePlayer] = createPlayer("");
+
+  const title = createElement("h2", { class: "title" });
+  const subTitle = createElement("h4", { class: "subtitle" });
+  const description = createElement("p", { class: "description" });
+  const picture = createElement("img", { class: "picture" });
+
+  const plug = createElement("div", { text: "select candidate" })
 
   const card = createElement("div", {
-    class: "card card--mystery",
-    children: [picture, title, player],
+    class: "card card--candidate",
+    children: [plug],
   });
 
-  const update = () => {};
+  const update = (candidate) => {
+
+    if (candidate) {
+      title.textContent = candidate.name;
+      subTitle.textContent = candidate.species;
+      description.textContent = candidate.description;
+
+      picture.src = candidate.image;
+      picture.alt = candidate.name;
+
+      updatePlayer(candidate.audio)
+
+      fetch(candidate.image).then(() => {
+        picture.src = candidate.image;
+        picture.alt = candidate.name;
+      })
+
+      if (!card.contains(title)) {
+        card.replaceChildren(picture, title, subTitle, player, description);
+      }
+    } else {
+      card.replaceChildren(plug);
+    }
+  };
 
   return [card, update];
 };
 
-export const createCandidateCard = (candidate) => {
-  const title = createElement("h2", { class: "card__title" });
-  const picture = createElement("img");
 
-  const content = createElement("div", {
-    children: [picture, title],
-  });
-
-  const html = createElement("div", {
-    class: "card card--candidate",
-    children: candidate
-      ? content
-      : createElement("div", { text: "select bird" }),
-  });
-
-  return {
-    html,
-    update(candidate) {
-      console.log(candidate);
-    },
-  };
-};

@@ -1,134 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BirdSong</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./style/app.css" />
-  </head>
-  <body>
-    <div>
-      <div class="container grid grid--head">
-        <h1><a href="">Lorem.</a></h1>
-        <div data-bind="score" class="score">0</div>
-      </div>
-      <div class="container grid grid--app">
-        <div class="group group--rounds">
-          <!-- <div class="active">Lorem, ipsum.</div>
-          <div>Ut, cumque!</div>
-          <div>Nulla, soluta.</div>
-          <div>Rem, fugit.</div>
-          <div>Obcaecati, optio.</div>
-          <div>Suscipit, debitis.</div> -->
-        </div>
-        <div class="card card--mystery">
-          <img
-            class="picture"
-            src="./assets/images/mystery.jpg"
-            alt="mystery"
-          />
-          <h2 class="title">******</h2>
-          <div class="player">
-            <button class="playpause">
-              <svg viewBox="-200 0 1200 1000">
-                <path
-                  d="M96.51 11.97c-31.23 8.05-53.26 32.76-63.42 71.27-3.45 12.84-3.64 29.7-3.64 416.71s.19 403.87 3.64 416.71c16.09 60.74 61.69 86.03 120.9 67.25 9-2.87 53.65-25.1 116.49-58.24 56.14-29.51 221.29-116.3 367.28-192.93 145.99-76.64 271.29-143.31 278.38-148.1 39.28-25.68 59.59-63.04 53.26-97.52-4.79-26.63-24.33-53.07-52.88-71.65C892 399.37 172.58 22.32 154.95 16.38c-18.97-6.33-43.3-8.24-58.44-4.41z"
-                ></path>
-              </svg>
-            </button>
-            <div class="timeline">
-              <span>00:00</span>
-              <input
-                class="range"
-                type="range"
-                min="0"
-                max="100"
-                value="0"
-                step="1"
-              />
-              <span>00:00</span>
-            </div>
-            <div class="volume">
-              <input
-                class="range"
-                type="range"
-                min="0"
-                max="100"
-                value="100"
-                step="1"
-              />
-            </div>
-          </div>
-        </div>
 
-        <div class="group group--candidates">
-          <div>Lorem, ipsum dolor.</div>
-          <div>Ipsam, accusamus. Quidem?</div>
-          <div>Reprehenderit, distinctio illum!</div>
-          <div>Tempore, nam! Ab.</div>
-          <div>Dolores, porro eligendi!</div>
-          <div>Eaque, nulla! Pariatur.</div>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BirdSong</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./style/app.css" />
+</head>
 
-        <div class="card card--candidate">
-          <img
-            class="picture"
-            src="./assets/images/mystery.jpg"
-            alt="mystery"
-          />
-          <h2 class="title">title</h2>
-          <h4 class="subtitle">subtitle</h4>
-          <div class="player">
-            <button class="playpause">
-              <svg viewBox="-200 0 1200 1000">
-                <path
-                  d="M96.51 11.97c-31.23 8.05-53.26 32.76-63.42 71.27-3.45 12.84-3.64 29.7-3.64 416.71s.19 403.87 3.64 416.71c16.09 60.74 61.69 86.03 120.9 67.25 9-2.87 53.65-25.1 116.49-58.24 56.14-29.51 221.29-116.3 367.28-192.93 145.99-76.64 271.29-143.31 278.38-148.1 39.28-25.68 59.59-63.04 53.26-97.52-4.79-26.63-24.33-53.07-52.88-71.65C892 399.37 172.58 22.32 154.95 16.38c-18.97-6.33-43.3-8.24-58.44-4.41z"
-                ></path>
-              </svg>
-            </button>
-            <div class="timeline">
-              <span>00:00</span>
-              <input
-                class="range"
-                type="range"
-                min="0"
-                max="100"
-                value="0"
-                step="1"
-              />
-              <span>00:00</span>
-            </div>
-            <div class="volume">
-              <input
-                class="range"
-                type="range"
-                min="0"
-                max="100"
-                value="100"
-                step="1"
-              />
-            </div>
-          </div>
-          <p class="description">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus
-            eius reiciendis velit praesentium veritatis rem veniam, dignissimos
-            minus ea inventore, voluptas repellat, eaque quisquam accusantium
-            nobis? Repellendus quidem labore molestias?
-          </p>
-        </div>
-
-        <!-- <button class="button button--next">
-          next round
-        </button> -->
-      </div>
+<body>
+  <div>
+    <div class="container grid grid--head">
+      <h1><a href="/"><img src="./assets/images/logo.svg" alt="logo"></a></h1>
+      <div>Score: <span class="score">0</span></div>
     </div>
-    <script src="./js/app.js" type="module"></script>
-  </body>
+    <div class="container grid grid--app"></div>
+  </div>
+  <script src="./js/app.js" type="module"></script>
+</body>
+
 </html>

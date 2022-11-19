@@ -1,4 +1,4 @@
-import { random, observable, createElement } from "./lib.js";
+import { random, observable } from "./lib.js";
 
 import { data, rounds } from "./birds.js";
 import { createRoundsGroup } from "./components/rounds.js";
@@ -33,6 +33,7 @@ const createApp = (matrix, points = 5) => {
         isMystery: item.id === this.mystery.id,
       }));
       this.isSolved = false;
+      this.candidate = null;
     },
     setCandidate(idx) {
       this.candidate = this.candidates[idx];
@@ -40,7 +41,7 @@ const createApp = (matrix, points = 5) => {
         if (this.mystery.id === this.candidate?.id) {
           this.isSolved = true;
           this.score +=
-            points - (this.candidates.filter((obj) => obj.isTried).length - 1);
+            points - (this.candidates.filter((obj) => obj.isTried).length);
           this.mystery = this.candidate;
         }
         this.candidates = this.candidates.map((obj, i) =>
@@ -63,31 +64,29 @@ app.listen("mystery", ({ isSolved, mystery }) => {
   isSolved
     ? updateMysteryEl(mystery)
     : updateMysteryEl({
-        ...mystery,
-        name: "******",
-        image: "../assets/images/mystery.jpg",
-      });
+      ...mystery,
+      name: "******",
+      image: "../assets/images/mystery.jpg",
+    });
 });
 
 app.listen("isSolved", ({ isSolved }) => {
   updateNextEl(isSolved);
 });
 
-app.listen("candidate", ({ isSolved, mystery }) => {});
+app.listen("candidate", ({ candidate }) => {
+  updateCandidateEl(candidate)
+});
 
 app.listen("candidates", ({ candidates }) => {
   updateCandidateEls(candidates);
 });
 
 app.listen("score", ({ score }) => {
-  bindings.forEach((el) => {
-    if (el.dataset["bind"] === "score") {
-      el.textContent = score;
-    }
-  });
+  scoreEl.textContent = score;
 });
 
-const [roundEls, updateRoundEls] = createRoundsGroup(rounds);
+const [roundEl, updateRoundEls] = createRoundsGroup(rounds);
 const [nextEl, updateNextEl] = createNextButton({
   onClick: () => app.nextRound(),
 });
@@ -97,18 +96,9 @@ const [candidateEls, updateCandidateEls] = createCandidatesGroup(
     onSelect: (idx) => app.setCandidate(idx),
   }
 );
-
 const [mysteryEl, updateMysteryEl] = createMystery(app.mystery);
-// const [candidateEl, updateCandidateEl] = createCandidate(app.candidate);
+const [candidateEl, updateCandidateEl] = createCandidate(app.candidate);
 
-document.querySelector(".group--rounds").append(...roundEls);
+const scoreEl = document.querySelector(".score");
 
-document.querySelector(".grid--app").append(candidateEls, nextEl);
-
-document.querySelector(".card--mystery").replaceWith(mysteryEl);
-
-document.querySelector(".group--candidates").replaceWith(candidateEls);
-
-const bindings = document.querySelectorAll("[data-bind]");
-
-// console.log(bindings);
+document.querySelector(".grid--app").append(roundEl, mysteryEl, candidateEls, candidateEl, nextEl);

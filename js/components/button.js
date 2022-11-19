@@ -16,11 +16,4 @@ export const createNextButton = ({ onClick }) => {
   };
 
   return [button, update];
-
-  return {
-    html: button,
-    update(isSolved) {
-      button.disabled = !isSolved;
-    },
-  };
 };

@@ -18,8 +18,11 @@ export const createMystery = (mystery) => {
 
   const update = ({ name, audio, image }) => {
     title.textContent = name;
-    picture.src = image;
-    picture.alt = name;
+
+    fetch(image).then(() => {
+      picture.src = image;
+      picture.alt = name;
+    })
 
     updatePlayer(audio);
   };

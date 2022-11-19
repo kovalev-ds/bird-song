@@ -105,6 +105,13 @@ body {
   gap: 1rem;
   padding: 1rem 0;
 }
+.grid--head {
+  grid-template-columns: 200px 1fr;
+  align-items: center;
+}
+.grid--head > :nth-child(2) {
+  justify-self: end;
+}
 @media screen and (min-width: 768px) {
   .grid--app {
     grid-template-columns: 1fr 2fr;

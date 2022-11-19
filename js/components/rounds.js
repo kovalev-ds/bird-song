@@ -1,12 +1,14 @@
 import { createElement } from "../lib.js";
 
-export const createRoundsGroup = (rounds) => {
-  const group = rounds.map((round, i) =>
+export const createRoundsGroup = (items) => {
+  const rounds = items.map((round, i) =>
     createElement("div", { text: round, class: i === 0 ? "active" : "" })
   );
 
+  const group = createElement("div", { class: "group group--rounds", children: rounds })
+
   const update = (idx) => {
-    group.forEach((el, i) => {
+    rounds.forEach((el, i) => {
       idx === i ? el.classList.add("active") : el.classList.remove("active");
     });
   };

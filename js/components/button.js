@@ -1,8 +1,8 @@
 import { createElement } from "../lib.js";
 
-export const createButton = ({ onClick }) => {
+export const createNextButton = ({ onClick }) => {
   const button = createElement("button", {
-    class: "button",
+    class: "button button--next",
     text: "next round",
     events: {
       click: onClick,
@@ -11,10 +11,16 @@ export const createButton = ({ onClick }) => {
 
   button.disabled = true;
 
+  const update = (isSolved) => {
+    button.disabled = !isSolved;
+  };
+
+  return [button, update];
+
   return {
     html: button,
     update(isSolved) {
-      button.disabled = !isSolved
-    }
-  }
-}
+      button.disabled = !isSolved;
+    },
+  };
+};

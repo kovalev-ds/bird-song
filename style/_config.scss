@@ -1,0 +1,8 @@
+$sm: 570px;
+$md: 768px;
+
+@mixin media($size) {
+  @media screen and (min-width: $size) {
+    @content;
+  }
+}

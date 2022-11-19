@@ -27,7 +27,8 @@ export const observable = (obj) => {
       },
       [dispatch](property, value) {
         const watchers = listeners.get(obj);
-        watchers &&
+
+        watchers[property] &&
           setTimeout(() => {
             watchers[property].forEach((fn) =>
               // try just use this
@@ -71,4 +72,15 @@ export const createElement = (type, options = {}) => {
   html && (el.innerHTML = html);
 
   return el;
+};
+
+export const calcRatio = (curr, full) => (curr / full) * 100;
+export const formatDuration = (duration) => {
+  const m = Math.floor(duration / 60)
+    .toString()
+    .padStart(2, "0");
+  const s = Math.floor(duration % 60)
+    .toString()
+    .padStart(2, "0");
+  return `${m}:${s}`;
 };

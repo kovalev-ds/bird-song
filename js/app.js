@@ -96,7 +96,7 @@ app.listen("score", ({ score }) => {
 
 app.listen("isCompleted", ({ score, isCompleted }) => {
   localStorage.setItem("state", JSON.stringify({ isCompleted, score }));
-  location.href = "/score.html"
+  location.href = "./score.html"
 })
 
 const [roundEl, updateRoundEls] = createRoundsGroup(rounds);

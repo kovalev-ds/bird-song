@@ -71,7 +71,7 @@ app.listen("mystery", ({ isSolved, mystery }) => {
     : updateMysteryEl({
       ...mystery,
       name: "******",
-      image: "../assets/images/mystery.jpg",
+      image: "./assets/images/mystery.jpg",
     });
 });
 

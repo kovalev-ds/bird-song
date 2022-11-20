@@ -1,5 +1,6 @@
 import { createElement } from "../lib.js";
 
+
 export const createCandidatesGroup = (group, { onSelect }) => {
   const items = group.map((obj) => createElement("div", { text: obj.name }));
 
@@ -15,16 +16,25 @@ export const createCandidatesGroup = (group, { onSelect }) => {
   });
 
   const update = (candidates) => {
+    const error = new Audio("../../assets/audio/error.mp3")
+    const success = new Audio("../../assets/audio/win.mp3")
+
     items.forEach((el, i) => {
       const { name, isTried, isMystery } = candidates[i];
 
       el.textContent = name;
 
-      isTried && isMystery
-        ? el.classList.add("success")
-        : isTried
-          ? el.classList.add("error")
-          : el.classList.remove("success", "error");
+      if (isTried && isMystery) {
+        !el.classList.contains("success") &&
+          success.play()
+        el.classList.add("success");
+      } else if (isTried) {
+        !el.classList.contains("error") &&
+          error.play()
+        el.classList.add("error")
+      } else {
+        el.classList.remove("success", "error")
+      }
     });
   };
 

@@ -7,9 +7,6 @@ import { createCandidatesGroup } from "./components/candidates.js";
 import { createMystery } from "./components/mystery.js";
 import { createCandidate } from "./components/candidate.js";
 
-const error = new Audio("../assets/audio/error.mp3")
-const success = new Audio("../assets/audio/win.mp3")
-
 const createApp = (matrix, points = 5) => {
   const mystery = matrix[0][random(0, matrix.length - 1)];
   const candidates = matrix[0].map((item) => ({

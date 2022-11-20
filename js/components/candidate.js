@@ -27,12 +27,12 @@ export const createCandidate = () => {
       picture.src = candidate.image;
       picture.alt = candidate.name;
 
-      updatePlayer(candidate.audio)
-
       fetch(candidate.image).then(() => {
         picture.src = candidate.image;
         picture.alt = candidate.name;
       })
+
+      updatePlayer(candidate.audio)
 
       if (!card.contains(title)) {
         card.replaceChildren(picture, title, subTitle, player, description);

@@ -207,10 +207,11 @@ body {
 .card--score {
   padding: 4rem 2rem;
   font-weight: 300;
+  text-align: center;
 }
 .card--score .title {
   font-weight: inherit;
-  font-size: 4.5rem;
+  font-size: 2.5rem;
   margin-bottom: 0.5rem;
 }
 .card--score .description {
@@ -348,6 +349,10 @@ body {
   padding: 1rem;
   border-radius: var(--radius);
   cursor: pointer;
+  transition: 0.2s ease;
+}
+.button:hover {
+  background-color: #008966;
 }
 .button:disabled {
   background-color: var(--clr-card-bg);

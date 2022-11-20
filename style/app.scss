@@ -35,7 +35,7 @@ body {
     grid-template-columns: 200px 1fr;
     align-items: center;
 
-    &> :nth-child(2) {
+    & > :nth-child(2) {
       justify-self: end;
     }
   }
@@ -45,23 +45,23 @@ body {
       grid-template-columns: 1fr 2fr;
       grid-template-areas: "head head" "mystery mystery" "group single" "button button";
 
-      &> :nth-child(1) {
+      & > :nth-child(1) {
         grid-area: head;
       }
 
-      &> :nth-child(2) {
+      & > :nth-child(2) {
         grid-area: mystery;
       }
 
-      &> :nth-child(3) {
+      & > :nth-child(3) {
         grid-area: group;
       }
 
-      &> :nth-child(4) {
+      & > :nth-child(4) {
         grid-area: single;
       }
 
-      &> :nth-child(5) {
+      & > :nth-child(5) {
         grid-area: button;
       }
     }
@@ -152,10 +152,11 @@ body {
   &--score {
     padding: 4rem 2rem;
     font-weight: 300;
+    text-align: center;
 
     .title {
       font-weight: inherit;
-      font-size: 4.5rem;
+      font-size: 2.5rem;
       margin-bottom: 0.5rem;
     }
 
@@ -198,12 +199,12 @@ body {
     justify-content: center;
 
     &:hover {
-      &>svg {
+      & > svg {
         transform: scale(1.25);
       }
     }
 
-    &>svg {
+    & > svg {
       height: 1rem;
       transition: 0.2s ease;
       fill: var(--clr-accent);
@@ -247,7 +248,7 @@ body {
     border-radius: var(--radius);
     overflow: hidden;
 
-    &>* {
+    & > * {
       flex: auto;
       padding: 0.5rem 0.75rem;
       text-align: center;
@@ -262,7 +263,7 @@ body {
   &--candidates {
     background-color: var(--clr-card-bg);
 
-    &>* {
+    & > * {
       padding: 0.85rem 1.25rem;
       background-color: #303030;
       border: 1px solid #555;
@@ -318,7 +319,11 @@ body {
   padding: 1rem;
   border-radius: var(--radius);
   cursor: pointer;
+  transition: 0.2s ease;
 
+  &:hover {
+    background-color: #008966;
+  }
   &:disabled {
     background-color: var(--clr-card-bg);
     cursor: auto;

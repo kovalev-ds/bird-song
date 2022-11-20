@@ -27,7 +27,7 @@ const createApp = (matrix, points = 5) => {
       if (this.round === matrix.length - 1) {
         this.isCompleted = true;
         return;
-      };
+      }
 
       this.round += 1;
       this.mystery = matrix[this.round][random(0, matrix.length - 1)];
@@ -42,16 +42,16 @@ const createApp = (matrix, points = 5) => {
     setCandidate(idx) {
       this.candidate = this.candidates[idx];
       if (!this.isSolved) {
-        this.candidates = this.candidates.map((obj, i) =>
-          idx === i ? { ...obj, isTried: true } : obj
-        );
-
         if (this.mystery.id === this.candidate?.id) {
           this.isSolved = true;
           this.score +=
-            points - (this.candidates.filter((obj) => obj.isTried).length);
+            points - this.candidates.filter((obj) => obj.isTried).length;
           this.mystery = this.candidate;
         }
+
+        this.candidates = this.candidates.map((obj, i) =>
+          idx === i ? { ...obj, isTried: true } : obj
+        );
       }
     },
   });
@@ -69,10 +69,10 @@ app.listen("mystery", ({ isSolved, mystery }) => {
   isSolved
     ? updateMysteryEl(mystery)
     : updateMysteryEl({
-      ...mystery,
-      name: "******",
-      image: "./assets/images/mystery.jpg",
-    });
+        ...mystery,
+        name: "******",
+        image: "./assets/images/mystery.jpg",
+      });
 });
 
 app.listen("isSolved", ({ isSolved }) => {
@@ -80,7 +80,7 @@ app.listen("isSolved", ({ isSolved }) => {
 });
 
 app.listen("candidate", ({ candidate, isSolved }) => {
-  updateCandidateEl(candidate)
+  updateCandidateEl(candidate);
 });
 
 app.listen("candidates", ({ candidates }) => {
@@ -93,8 +93,8 @@ app.listen("score", ({ score }) => {
 
 app.listen("isCompleted", ({ score, isCompleted }) => {
   localStorage.setItem("state", JSON.stringify({ isCompleted, score }));
-  location.href = "./score.html"
-})
+  location.href = "./score.html";
+});
 
 const [roundEl, updateRoundEls] = createRoundsGroup(rounds);
 const [nextEl, updateNextEl] = createNextButton({
@@ -111,4 +111,6 @@ const [candidateEl, updateCandidateEl] = createCandidate(app.candidate);
 
 const scoreEl = document.querySelector(".score");
 
-document.querySelector(".grid--app").append(roundEl, mysteryEl, candidateEls, candidateEl, nextEl);
+document
+  .querySelector(".grid--app")
+  .append(roundEl, mysteryEl, candidateEls, candidateEl, nextEl);

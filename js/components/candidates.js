@@ -16,8 +16,8 @@ export const createCandidatesGroup = (group, { onSelect }) => {
   });
 
   const update = (candidates) => {
-    const error = new Audio("../../assets/audio/error.mp3")
-    const success = new Audio("../../assets/audio/win.mp3")
+    const error = new Audio("./assets/audio/error.mp3")
+    const success = new Audio("./assets/audio/win.mp3")
 
     items.forEach((el, i) => {
       const { name, isTried, isMystery } = candidates[i];

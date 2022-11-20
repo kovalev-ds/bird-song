@@ -7,6 +7,9 @@ import { createCandidatesGroup } from "./components/candidates.js";
 import { createMystery } from "./components/mystery.js";
 import { createCandidate } from "./components/candidate.js";
 
+const error = new Audio("../assets/audio/error.mp3")
+const success = new Audio("../assets/audio/win.mp3")
+
 const createApp = (matrix, points = 5) => {
   const mystery = matrix[0][random(0, matrix.length - 1)];
   const candidates = matrix[0].map((item) => ({
@@ -22,8 +25,12 @@ const createApp = (matrix, points = 5) => {
     candidates,
     candidate: null,
     isSolved: false,
+    isCompleted: false,
     nextRound() {
-      if (this.round === matrix.length - 1) return;
+      if (this.round === matrix.length - 1) {
+        this.isCompleted = true;
+        return;
+      };
 
       this.round += 1;
       this.mystery = matrix[this.round][random(0, matrix.length - 1)];
@@ -38,15 +45,16 @@ const createApp = (matrix, points = 5) => {
     setCandidate(idx) {
       this.candidate = this.candidates[idx];
       if (!this.isSolved) {
+        this.candidates = this.candidates.map((obj, i) =>
+          idx === i ? { ...obj, isTried: true } : obj
+        );
+
         if (this.mystery.id === this.candidate?.id) {
           this.isSolved = true;
           this.score +=
             points - (this.candidates.filter((obj) => obj.isTried).length);
           this.mystery = this.candidate;
         }
-        this.candidates = this.candidates.map((obj, i) =>
-          idx === i ? { ...obj, isTried: true } : obj
-        );
       }
     },
   });
@@ -74,7 +82,7 @@ app.listen("isSolved", ({ isSolved }) => {
   updateNextEl(isSolved);
 });
 
-app.listen("candidate", ({ candidate }) => {
+app.listen("candidate", ({ candidate, isSolved }) => {
   updateCandidateEl(candidate)
 });
 
@@ -85,6 +93,11 @@ app.listen("candidates", ({ candidates }) => {
 app.listen("score", ({ score }) => {
   scoreEl.textContent = score;
 });
+
+app.listen("isCompleted", ({ score, isCompleted }) => {
+  localStorage.setItem("state", JSON.stringify({ isCompleted, score }));
+  location.href = "/score.html"
+})
 
 const [roundEl, updateRoundEls] = createRoundsGroup(rounds);
 const [nextEl, updateNextEl] = createNextButton({

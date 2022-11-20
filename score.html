@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BirdSong</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style/app.css" />
+</head>
+
+<body>
+  <div>
+    <div class="container grid grid--head">
+      <h1><a href="/"><img src="./assets/images/logo.svg" alt="logo"></a></h1>
+      <div>Score: <span class="score">0</span></div>
+    </div>
+    <div class="container grid grid--score">
+      <div class="card card--score">
+        <h2 class="title">Поздравляем!</h2>
+        <div class="description">Вы прошли викторину и набрали <strong class="result">0</strong> из <strong>30</strong>
+          возможных баллов
+        </div>
+        <hr>
+        <button class="button button--repeat">Попробовать ещё раз!</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const state = localStorage.getItem("state");
+
+    if (!state) {
+      location.href = "/app.html"
+    }
+
+    const { isCompleted, score } = JSON.parse(state);
+
+    document.querySelector('.score').textContent = score;
+    document.querySelector('.result').textContent = score;
+    document.querySelector(".button--repeat").addEventListener("click", () => {
+      localStorage.removeItem("state")
+      location.href = '/app.html'
+    })
+
+  </script>
+</body>
+
+</html>

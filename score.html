@@ -15,7 +15,7 @@
 <body>
   <div>
     <div class="container grid grid--head">
-      <h1><a href="/"><img src="./assets/images/logo.svg" alt="logo"></a></h1>
+      <h1><a href="./"><img src="./assets/images/logo.svg" alt="logo"></a></h1>
       <div>Score: <span class="score">0</span></div>
     </div>
     <div class="container grid grid--score">
@@ -34,7 +34,7 @@
     const state = localStorage.getItem("state");
 
     if (!state) {
-      location.href = "/app.html"
+      location.href = "./app.html"
     }
 
     const { isCompleted, score } = JSON.parse(state);
@@ -43,7 +43,7 @@
     document.querySelector('.result').textContent = score;
     document.querySelector(".button--repeat").addEventListener("click", () => {
       localStorage.removeItem("state")
-      location.href = '/app.html'
+      location.href = './app.html'
     })
 
   </script>

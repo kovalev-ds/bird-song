@@ -7,7 +7,7 @@ export const createMystery = (mystery) => {
   const title = createElement("h2", { class: "title", text: "******" });
   const picture = createElement("img", {
     class: "picture",
-    src: "../assets/images/mystery.jpg",
+    src: "./assets/images/mystery.jpg",
     alt: "mystery",
   });
 

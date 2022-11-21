@@ -95,6 +95,15 @@ body {
   font-family: var(--ff-sans);
 }
 
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.page > :nth-child(2) {
+  flex: 1;
+}
+
 .container {
   width: min(90%, 1200px);
   margin-inline: auto;
@@ -132,6 +141,14 @@ body {
   .grid--app > :nth-child(5) {
     grid-area: button;
   }
+}
+.grid--footer {
+  grid-template-columns: 1fr 72px 32px;
+  align-items: center;
+  gap: 1rem;
+}
+.grid--score {
+  align-items: start;
 }
 
 .card {

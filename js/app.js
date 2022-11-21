@@ -69,17 +69,17 @@ app.listen("mystery", ({ isSolved, mystery }) => {
   isSolved
     ? updateMysteryEl(mystery)
     : updateMysteryEl({
-        ...mystery,
-        name: "******",
-        image: "./assets/images/mystery.jpg",
-      });
+      ...mystery,
+      name: "******",
+      image: "./assets/images/mystery.jpg",
+    });
 });
 
 app.listen("isSolved", ({ isSolved }) => {
   updateNextEl(isSolved);
 });
 
-app.listen("candidate", ({ candidate, isSolved }) => {
+app.listen("candidate", ({ candidate }) => {
   updateCandidateEl(candidate);
 });
 

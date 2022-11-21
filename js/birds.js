@@ -373,4 +373,4 @@ export const data = [
   ],
 ];
 
-export const rounds = ["first", "second", "third", "forth", "fifth", "sixth"];
+export const rounds = ["Разминка", "Воробьиные", "Лесные птицы", "Певчие птицы", "Хищные птицы", "Морские птицы"];

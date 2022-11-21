@@ -10,7 +10,7 @@ export const createCandidate = () => {
   const description = createElement("p", { class: "description" });
   const picture = createElement("img", { class: "picture" });
 
-  const plug = createElement("div", { text: "select candidate" })
+  const plug = createElement("div", { text: "Послушайте плеер. Выберите птицу из списка" })
 
   const card = createElement("div", {
     class: "card card--candidate",
@@ -38,6 +38,7 @@ export const createCandidate = () => {
         card.replaceChildren(picture, title, subTitle, player, description);
       }
     } else {
+      updatePlayer(null)
       card.replaceChildren(plug);
     }
   };

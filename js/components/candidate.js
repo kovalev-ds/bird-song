@@ -10,7 +10,7 @@ export const createCandidate = () => {
   const description = createElement("p", { class: "description" });
   const picture = createElement("img", { class: "picture" });
 
-  const plug = createElement("div", { text: "Выбирите птицу, прослушайте звук." })
+  const plug = createElement("div", { text: "Послушайте плеер. Выберите птицу из списка" })
 
   const card = createElement("div", {
     class: "card card--candidate",
